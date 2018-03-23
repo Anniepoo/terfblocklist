@@ -91,7 +91,7 @@ valid_credentials('annie', 'lubber').
 
 home_body -->
     {
-    query('"are not women"', Terfs)
+       unified_queries(Terfs)
     },
     html([
         \html_requires(style),
@@ -106,17 +106,22 @@ all_the_terfs([TERF | More]) -->
         desc: Profile,
         userid: UserID,
         name: Name,
-        tweets: [
-            tweet{
-                tweetid: TweetID,
-                text: Text}
-            |_]
+        tweets: Tweets
         }  :< TERF
     },
     html(div(class(aterf), [
                  p([Name, a([target('_blank'), href('https://twitter.com/~w'-[ScreenName])], [' ', &(commat), ScreenName])]),
                  p(class(profile), Profile),
-                 p(a([target('_blank'), href('https://twitter.com/~w/status/~w'-[ScreenName, TweetID])], Text)),
+                 div(class(tweets), \all_tweets(ScreenName, Tweets)),
                  p(['block:', input([type(checkbox), name(UserID), checked(checked)], []), 'block this user'])
              ])),
     all_the_terfs(More).
+
+
+all_tweets(_, []) --> [].
+all_tweets(ScreenName, [Tweet | More])-->
+    html(
+        p(a([target('_blank'), href('https://twitter.com/~w/status/~w'-[ScreenName, Tweet.tweetid])], Tweet.text))
+    ),
+    all_tweets(ScreenName, More).
+
