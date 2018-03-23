@@ -10,15 +10,13 @@ You need to go to https://apps.twitter.com/ and make an app with a consumer key 
     ?- pack_install(twitter).
     ?- go.
     ?- set_setting(find_a_terf:consumer_key, 'Your consumer key').
-true.
+    true.
     ?- set_setting(find_a_terf:consumer_secret, 'your secret').
-true.
+    true.
     ?-save_settings('settings.db').
     ?- halt.
 
-Now restart the server 
+Now restart the server
 
     swipl terf_server.pl
     ?- go.
-
-
