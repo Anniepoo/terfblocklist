@@ -27,7 +27,7 @@ user:file_search_path(icons, './icons').
 
 go :-
     http_set_session_options([timeout(3600)]),
-    http_server(http_dispatch, [port(6070)]).
+    http_server(http_dispatch, [port(6070), timeout(180)]).
 
 :- http_handler(/, logged_in_page(home_page), []).
 :- http_handler('/login', login_handler, []).
@@ -39,6 +39,7 @@ go :-
 :- http_handler(img(.), http_reply_from_files('icons/', []),
                 [priority(1000), prefix]).
 
+:- include('credentials.cred').
 
 logged_in_page(Page, Request) :-
     (   logged_in
@@ -86,9 +87,6 @@ home_page(_Request) :-
     reply_html_page(
         [title('Terf finder home')],
         \home_body).
-
-valid_credentials('annie', 'lubber').
-
 
 home_body -->
     {

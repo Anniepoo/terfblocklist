@@ -4,6 +4,12 @@ Written for @TERFBlocklist on Twitter, a tool to partially automate the process 
 
 ## Usage
 
+create a file credentials.cred with lines like
+
+    valid_credentials('annie', 'lubber').
+
+for the user name/pw's 
+
 You need to go to https://apps.twitter.com/ and make an app with a consumer key and consumer secret.
 
     swipl terf_server.pl
