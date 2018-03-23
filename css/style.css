@@ -6,6 +6,10 @@
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+#headerbar {
+    position: fixed;
+    right: 0;
+}
 
 .profile {
 	font-size: small;
