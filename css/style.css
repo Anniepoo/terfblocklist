@@ -1,7 +1,18 @@
 .aterf {
-    border: solid 1px green;
+    	border: solid 1px green;
+	background-color: #ddffdd;
+	padding: 8px;
+	margin: 16px;
+	font-family: Arial, Helvetica, sans-serif;
 }
+
 #headerbar {
     position: fixed;
     right: 0;
 }
+
+.profile {
+	font-size: small;
+	font-style: italic;
+}
+
