@@ -23,6 +23,7 @@ user:file_search_path(js, './js').
 user:file_search_path(icons, './icons').
 
 :- html_resource(style, [virtual(true), requires([css('style.css')]), mime_type(text/css)]).
+:- html_resource(script, [virtual(true), requires([js('makelist.js')]), mime_type(text/javascript)]).
 
 go :-
     http_set_session_options([timeout(3600)]),
@@ -95,6 +96,9 @@ home_body -->
     },
     html([
         \html_requires(style),
+        \html_requires(script),
+        html(div(id(headerbar),
+                [button(id(exportButton), 'Export CSV')])),
         \all_the_terfs(Terfs)
     ]).
 
@@ -117,6 +121,8 @@ all_the_terfs([TERF | More]) -->
                  p([Name, a([target('_blank'), href('https://twitter.com/~w'-[ScreenName])], [' ', &(commat), ScreenName])]),
                  p(class(profile), Profile),
                  p(a([target('_blank'), href('https://twitter.com/~w/status/~w'-[ScreenName, TweetID])], Text)),
-                 p(['block:', input([type(checkbox), name(UserID), checked(checked)], []), 'block this user'])
+                 label(['block:',
+                        input([class(userblock), type(checkbox), name(UserID), checked(checked)], []),
+                        'block this user'])
              ])),
     all_the_terfs(More).
